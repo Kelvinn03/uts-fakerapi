@@ -1,6 +1,18 @@
-# Backend Programming Template (2025)
+# UTS Backend Programming (2025)
 
-## Development Setup
+## Kelompok 1
+- Shinichi Wijaya (535240025)
+- Faiz Abdurrahman (535240041)
+- Eric Cantona (535240162)
+- Andronikus Gamaliel Pangabdi (535240166)
+- Kelvin (535249102)
+
+## Topik
+[Faker API](https://fakerapi.it/)
+
+## Backend Programming Template (2025)
+
+### Development Setup
 
 1. Fork and clone this repository to your local computer.
 2. Open the project using VS Code.
@@ -10,7 +22,7 @@
 6. Run `npm run dev` to start the dev server.
 7. Test the endpoints in the API client app.
 
-## Add New API Endpoints
+### Add New API Endpoints
 
 1. Create a new database schema in `./src/models`.
 2. Create a new folder in `./src/api/components` (if needed). Remember to separate your codes to repositories, services, controllers, and routes.
