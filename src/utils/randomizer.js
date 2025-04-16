@@ -3,7 +3,7 @@ const seedrandom = require('seedrandom');
 function getRandomIds(seed, ids) {
   const rng = seedrandom(seed);
 
-  const m = ids.length;
+  let m = ids.length;
   let t;
   let i;
 
