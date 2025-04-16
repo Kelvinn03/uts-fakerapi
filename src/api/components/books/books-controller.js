@@ -1,27 +1,25 @@
 const booksService = require('./books-service');
-const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getBooks(request, response, next) {
   try {
-    const books = await booksService.getBooks();
+    const { _quantity = 1, _seed = null, _locale = 'id_ID' } = request.query;
 
-    return response.status(200).json(books);
-  } catch (error) {
-    return next(error);
-  }
-}
+    const books = await booksService.getBooks(
+      parseInt(_quantity),
+      _seed,
+      _locale
+    );
 
-async function createBook(request, response, next) {
-  try {
-    const { title } = request.body;
+    const responsePayload = {
+      status: 'OK',
+      code: 200,
+      locale: _locale,
+      seed: _seed,
+      total: books.length,
+      data: books,
+    };
 
-    if (!title) {
-      throw errorResponder(errorTypes.VALIDATION_ERROR, 'Title is required');
-    }
-
-    const book = await booksService.create(title);
-
-    return response.status(200).json(book);
+    return response.status(200).json(responsePayload);
   } catch (error) {
     return next(error);
   }
@@ -29,5 +27,4 @@ async function createBook(request, response, next) {
 
 module.exports = {
   getBooks,
-  createBook,
 };

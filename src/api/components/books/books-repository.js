@@ -1,14 +1,11 @@
 const { Books } = require('../../../models');
 
-async function getBooks() {
-  return Books.find({});
-}
-
-async function create(title) {
-  return Books.create({ title });
+async function getBooks(locale) {
+  return Books.find({ _locale: locale }).select(
+    'id title author genre description isbn image published publisher'
+  );
 }
 
 module.exports = {
   getBooks,
-  create,
 };
