@@ -1,4 +1,4 @@
-const creditCardRepository = require('./creditcards.repository');
+const creditCardRepository = require('./creditcards-repository');
 
 async function generateCreditCards(quantity) {
   return creditCardRepository.getFakeCreditCards(quantity);
