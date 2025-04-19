@@ -3,18 +3,21 @@ const seedrandom = require('seedrandom');
 function getRandomIds(seed, ids) {
   const rng = seedrandom(seed);
 
-  let m = ids.length;
+  const array = ids.slice();
+
+  let m = array.length;
   let t;
   let i;
 
   while (m) {
-    i = Math.floor(rng() * m--);
-    t = ids[m];
-    ids[m] = ids[i];
-    ids[i] = t;
+    i = Math.floor(rng() * m);
+    m -= 1;
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
   }
 
-  return ids;
+  return array;
 }
 
 module.exports = getRandomIds;

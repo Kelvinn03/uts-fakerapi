@@ -3,24 +3,24 @@ const addressService = require('./address-service');
 async function getAddresses(request, response, next) {
   try {
     const {
-      _quantity = 1,
-      _seed = null,
-      _locale = 'id_ID',
-      _country_code = null,
+      _quantity: quantity = 1,
+      _seed: seed = null,
+      _locale: locale = 'id_ID',
+      _country_code: countryCode = null,
     } = request.query;
 
     const addresses = await addressService.getAddresses(
-      parseInt(_quantity),
-      _seed,
-      _locale,
-      _country_code
+      parseInt(quantity, 10),
+      seed,
+      locale,
+      countryCode
     );
 
     const responsePayload = {
       status: 'OK',
       code: 200,
-      locale: _locale,
-      seed: _seed,
+      locale,
+      seed,
       total: addresses.length,
       data: addresses,
     };
