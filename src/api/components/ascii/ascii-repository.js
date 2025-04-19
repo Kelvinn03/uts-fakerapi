@@ -1,25 +1,5 @@
 const { AsciiArt } = require('../../../models');
 
-async function getRandomArt(quantity = 1) {
-  try {
-    // First check if collection is empty
-    const count = await AsciiArt.countDocuments();
-
-    if (count === 0) {
-      await seedInitialData();
-    }
-
-    // Validate quantity
-    const validatedQuantity = Math.min(Math.max(parseInt(quantity), 1), 10);
-
-    // Get random documents
-    return await AsciiArt.aggregate([{ $sample: { size: validatedQuantity } }]);
-  } catch (error) {
-    console.error('Error in getRandomArt:', error);
-    throw error;
-  }
-}
-
 async function seedInitialData() {
   const asciiArts = [
     {
@@ -81,6 +61,26 @@ async function seedInitialData() {
   await AsciiArt.insertMany(asciiArts);
 }
 
+async function getRandomArt(quantity = 1) {
+  try {
+    // First check if collection is empty
+    const count = await AsciiArt.countDocuments();
+
+    if (count === 0) {
+      await seedInitialData();
+    }
+
+    // Validate quantity
+    const validatedQuantity = Math.min(Math.max(parseInt(quantity), 1), 10);
+
+    // Get random documents
+    return await AsciiArt.aggregate([{ $sample: { size: validatedQuantity } }]);
+  } catch (error) {
+    console.error('Error in getRandomArt:', error);
+    throw error;
+  }
+}
+
 async function deleteAsciiArt(id) {
   try {
     const result = await AsciiArt.deleteOne({ _id: id });
@@ -94,7 +94,20 @@ async function deleteAsciiArt(id) {
   }
 }
 
+async function clearAllAsciiArt() {
+  try {
+    const result = await AsciiArt.deleteMany({});
+    console.log(`Cleared ${result.deletedCount} artworks`);
+    return result;
+  } catch (error) {
+    console.error('Error clearing artworks:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   getRandomArt,
+  seedInitialData,
   deleteAsciiArt,
+  clearAllAsciiArt,
 };

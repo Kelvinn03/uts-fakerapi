@@ -7,4 +7,5 @@ module.exports = (app) => {
   app.use('/asciiArt', route);
   route.get('/', asciiArtController.getAsciiArt);
   route.delete('/:id', asciiArtController.deleteAsciiArt);
+  route.post('/reset', asciiArtController.resetAsciiArt);
 };

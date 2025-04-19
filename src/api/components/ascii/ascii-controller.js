@@ -5,7 +5,7 @@ const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getAsciiArt(request, response, next){
   try{
-    const quantity = parseInt(request.query.quantity, 10) || 1;
+    const quantity = parseInt(request.query.quantity, 10) || 10;
 
     // Validate quantity
     if (quantity < 1 || quantity > 10) {
@@ -53,7 +53,22 @@ async function deleteAsciiArt(request, response, next) {
   }
 }
 
+async function resetAsciiArt(request, response, next) {
+  try {
+    await AsciiArtService.clearAllAsciiArt();
+    await AsciiArtService.seedInitialData();
+
+    return response.status(200).json({
+      status: 'OK',
+      message: 'Artwork database reset successfully'
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getAsciiArt,
   deleteAsciiArt,
+  resetAsciiArt,
 };

@@ -1,18 +1,18 @@
 const { faker } = require('@faker-js/faker');
 const { CreditCard } = require('../../../models');
 
-async function getFakeCreditCards(quantity) {
+async function getCreditCards(quantity) {
   // Check if we have enough cards in DB
   const count = await CreditCard.countDocuments();
   
   if (count < quantity) {
-    await seedFakeCreditCards(Math.max(quantity, 10));
+    await seedCreditCards(Math.max(quantity, 10));
   }
   
   return await CreditCard.find().limit(quantity);
 }
 
-async function seedFakeCreditCards(quantity) {
+async function seedCreditCards(quantity) {
   const cards = [];
   
   for (let i = 0; i < quantity; i++) {
@@ -38,7 +38,33 @@ async function seedFakeCreditCards(quantity) {
   await CreditCard.insertMany(cards);
 }
 
+async function deleteCreditCard(id) {
+  try {
+    const result = await CreditCard.deleteOne({ _id: id });
+    if (result.deletedCount === 0) {
+      throw new Error('Credit card not found');
+    }
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting credit card:', error);
+    throw error;
+  }
+}
+
+async function clearAllCreditCards() {
+  try {
+    const result = await CreditCard.deleteMany({});
+    console.log(`Cleared ${result.deletedCount} credit cards`);
+    return result;
+  } catch (error) {
+    console.error('Error clearing credit cards:', error);
+    throw error;
+  }
+}
+
 module.exports = {
-  getFakeCreditCards,
-  seedFakeCreditCards
+  getCreditCards,
+  seedCreditCards,
+  clearAllCreditCards,
+  deleteCreditCard,
 };

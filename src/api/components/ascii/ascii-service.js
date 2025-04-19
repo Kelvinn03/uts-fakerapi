@@ -13,7 +13,17 @@ async function removeAsciiArt(id) {
   }
 }
 
+async function clearAllAsciiArt() {
+  return asciiArtRepository.clearAllAsciiArt();
+}
+
+async function seedInitialData() {
+  return asciiArtRepository.seedInitialData();
+}
+
 module.exports = {
   generateAscii,
   removeAsciiArt,
+  clearAllAsciiArt,
+  seedInitialData,
 };
