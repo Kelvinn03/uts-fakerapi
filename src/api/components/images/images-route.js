@@ -8,5 +8,4 @@ module.exports = (app) => {
   route.get('/', imagesController.getImage);
   route.delete('/:id', imagesController.deleteImage);
   route.post('/reset', imagesController.resetImages);
-
 };
