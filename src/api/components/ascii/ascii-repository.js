@@ -1,18 +1,17 @@
 const { AsciiArt } = require('../../../models');
 
-
 async function getRandomArt(quantity = 1) {
   try {
     // First check if collection is empty
     const count = await AsciiArt.countDocuments();
-    
+
     if (count === 0) {
       await seedInitialData();
     }
 
     // Validate quantity
     const validatedQuantity = Math.min(Math.max(parseInt(quantity), 1), 10);
-    
+
     // Get random documents
     return await AsciiArt.aggregate([{ $sample: { size: validatedQuantity } }]);
   } catch (error) {
@@ -21,8 +20,7 @@ async function getRandomArt(quantity = 1) {
   }
 }
 
-
-async function seedInitialData(){
+async function seedInitialData() {
   const asciiArts = [
     {
       title: 'Cat',
@@ -35,50 +33,50 @@ async function seedInitialData(){
     },
     {
       title: 'Fish',
-      art: `><(((('>`,
+      art: "><(((('>",
       category: 'Animals',
     },
     {
-      title: "Cocktail",
-      art: "ʕ•́ᴥ•̀ʔっ🍸",
-      category: "Food/Drink",
+      title: 'Cocktail',
+      art: 'ʕ•́ᴥ•̀ʔっ🍸',
+      category: 'Food/Drink',
     },
     {
-      title: "Shrug",
+      title: 'Shrug',
       art: '¯\\_(ツ)_/¯',
-      category: "Emoticon",
+      category: 'Emoticon',
     },
     {
-      title: "Bear",
-      art: "ʕ•ᴥ•ʔ",
-      category: "Animal",
+      title: 'Bear',
+      art: 'ʕ•ᴥ•ʔ',
+      category: 'Animal',
     },
     {
-      title: "Table Flip",
-      art: "(╯°□°）╯︵ ┻━┻",
-      category: "Emoticon",
+      title: 'Table Flip',
+      art: '(╯°□°）╯︵ ┻━┻',
+      category: 'Emoticon',
     },
     {
-      title: "Cat",
-      art: "=^..^=",
-      category: "Animal",
+      title: 'Cat',
+      art: '=^..^=',
+      category: 'Animal',
     },
     {
-      title: "Spider",
-      art: "/╲/\\╭(ఠఠ益ఠఠ)╮/\\╱\\",
-      category: "Animal",
+      title: 'Spider',
+      art: '/╲/\\╭(ఠఠ益ఠఠ)╮/\\╱\\',
+      category: 'Animal',
     },
     {
-      title: "Dancing Man",
-      art: "ヽ(•‿•)ノ",
-      category: "People",
+      title: 'Dancing Man',
+      art: 'ヽ(•‿•)ノ',
+      category: 'People',
     },
     {
-      title: "Kirby",
-      art: "(っ◕‿◕)っ",
-      category: "Gaming",
-    }
-  ]
+      title: 'Kirby',
+      art: '(っ◕‿◕)っ',
+      category: 'Gaming',
+    },
+  ];
 
   await AsciiArt.insertMany(asciiArts);
 }
