@@ -3,7 +3,7 @@ const { Funfact } = require('../../../models');
 async function seedInitialData() {
   const funfact = [
     {
-      fact: 'Bananas are berries, but strawberries aren\'t.',
+      fact: "Bananas are berries, but strawberries aren't.",
       year_found: 2008,
       source: 'Botanical classification studies',
       category: 'Science',
@@ -23,7 +23,7 @@ async function seedInitialData() {
     {
       fact: 'Honey never spoils — edible pots of honey were found in ancient Egyptian tombs.',
       year_found: 1922,
-      source: 'Archaeological discovery of Tutankhamun\'s tom',
+      source: "Archaeological discovery of Tutankhamun's tom",
       category: 'Food',
     },
     {
@@ -39,7 +39,7 @@ async function seedInitialData() {
       category: 'Animal',
     },
     {
-      fact: 'There\'s a species of jellyfish that can potentially live forever.',
+      fact: "There's a species of jellyfish that can potentially live forever.",
       year_found: 1996,
       source: 'Marine biology - Turritopsis dohrnii research',
       category: 'Biology',
@@ -93,10 +93,63 @@ async function clearAllFunfacts() {
   }
 }
 
+async function getByCategory(categoryParam, quantity = 7) {
+  try {
+    const category = String(categoryParam).trim().toLowerCase();
+
+    // cari semua kategori yang ada (case-insensitive)
+    const categories = await Funfact.distinct('category');
+
+    // cari kategori yang sesuai (case-insensitive)
+    const matchedCategory = categories.find(
+      (cat) => String(cat).toLowerCase() === category.toLowerCase()
+    );
+
+    if (!matchedCategory) {
+      throw new Error(`Invalid category. Available: ${categories.join(', ')}`);
+    }
+
+    return await Funfact.aggregate([
+      { $match: { category: matchedCategory } },
+      { $sample: { size: quantity } },
+    ]);
+  } catch (error) {
+    console.error('Error in getByCategory:', error);
+    throw error;
+  }
+}
+
+async function searchFunfact(query) {
+  try {
+    return await Funfact.find({
+      $or: [
+        { fact: { $regex: query, $options: 'i' } },
+        { source: { $regex: query, $options: 'i' } },
+        { category: { $regex: query, $options: 'i' } },
+      ],
+    }).limit(10);
+  } catch (error) {
+    console.error('Error in searchFunfact:', error);
+    throw error;
+  }
+}
+
+async function getCategories() {
+  try {
+    const categories = await Funfact.distinct('category');
+    return categories;
+  } catch (error) {
+    console.error('Error in getCategories:', error);
+    throw error;
+  }
+}
 
 module.exports = {
   getRandomFact,
   seedInitialData,
   deleteFunfact,
   clearAllFunfacts,
+  getByCategory,
+  searchFunfact,
+  getCategories,
 };
