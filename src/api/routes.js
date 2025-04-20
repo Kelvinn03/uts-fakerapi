@@ -6,6 +6,7 @@ const creditcards = require('./components/creditCards/creditcards-route');
 const asciiArt = require('./components/ascii/ascii-route');
 const funfact = require('./components/funfact/funfact-route');
 const images = require('./components/images/images-route');
+const texts = require('./components/texts/texts-route');
 
 module.exports = () => {
   const app = express.Router();
@@ -16,5 +17,6 @@ module.exports = () => {
   asciiArt(app);
   funfact(app);
   images(app);
+  texts(app);
   return app;
 };
