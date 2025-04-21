@@ -8,4 +8,7 @@ module.exports = (app) => {
   route.get('/', funfactController.getFunFact);
   route.delete('/:id', funfactController.deleteFunfact);
   route.post('/reset', funfactController.resetFunfacts);
+  route.get('/categories/:category', funfactController.getByCategory);
+  route.get('/categories', funfactController.getCategories);
+  route.get('/search', funfactController.searchFunfact);
 };
