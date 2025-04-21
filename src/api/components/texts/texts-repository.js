@@ -1,16 +1,11 @@
-import { Texts } from '../../../models';
+const { Texts } = require('../../../models');
 
-async function getTexts(locale, title) {
-    const query = { _locale: locale };
-    if (title) {
-        query.title = title;
-    }
-
-    return Texts.find(query).select(
-        'title author genre content'
-    );
+async function getTexts(locale) {
+  return Texts.find({ _locale: locale }).select(
+    'title author genre content'
+  );
 }
 
-export default {
-    getTexts,
+module.exports = {
+  getTexts,
 };
