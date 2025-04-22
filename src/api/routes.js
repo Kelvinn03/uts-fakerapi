@@ -2,6 +2,7 @@ const express = require('express');
 
 const books = require('./components/books/books-route');
 const users = require('./components/users/users-route');
+const address = require('./components/address/address-route');
 const creditcards = require('./components/creditCards/creditcards-route');
 const asciiArt = require('./components/ascii/ascii-route');
 const funfact = require('./components/funfact/funfact-route');
@@ -13,6 +14,7 @@ module.exports = () => {
 
   books(app);
   users(app);
+  address(app);
   creditcards(app);
   asciiArt(app);
   funfact(app);
