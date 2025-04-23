@@ -7,6 +7,7 @@ const asciiArt = require('./components/ascii/ascii-route');
 const funfact = require('./components/funfact/funfact-route');
 const images = require('./components/images/images-route');
 const texts = require('./components/texts/texts-route');
+const quotes = require('./components/quotes/quotes-route');
 
 module.exports = () => {
   const app = express.Router();
@@ -18,5 +19,6 @@ module.exports = () => {
   funfact(app);
   images(app);
   texts(app);
+  quotes(app);
   return app;
 };
