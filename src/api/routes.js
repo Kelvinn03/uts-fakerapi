@@ -15,6 +15,7 @@ const products = require('./components/products/product-route');
 const places = require('./components/places/place-route');
 const texts = require('./components/texts/text-route');
 const people = require('./components/people/people-route');
+const music = require('./components/music/music-route');
 
 module.exports = () => {
   const app = express.Router();
@@ -32,6 +33,7 @@ module.exports = () => {
   places(app);
   texts(app);
   people(app);
+  music(app);
 
   return app;
 };
