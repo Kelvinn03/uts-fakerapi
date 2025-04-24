@@ -1,6 +1,6 @@
 module.exports = (db) =>
   db.model(
-    'Addresss',
+    'Address',
     db.Schema({
       streetAddress: String,
       streetName: String,
