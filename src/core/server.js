@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const express = require('express');
 const pinoHTTP = require('pino-http');
@@ -22,6 +23,8 @@ app.use(require('method-override')());
 
 // Middleware that transforms the raw string of request.body into JSON
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 // Needed to use multipart/form-data for file uploads
 app.use(bodyParser.urlencoded({ extended: false }));
