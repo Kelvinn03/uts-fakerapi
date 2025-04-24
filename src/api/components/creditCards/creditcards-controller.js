@@ -1,67 +1,31 @@
-const mongoose = require('mongoose');
-
 const creditCardService = require('./creditcards-service');
-const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getCreditCards(request, response, next) {
   try {
-    const quantity = parseInt(request.query.quantity, 10) || 10;
+    const {
+      _quantity: quantity = 1,
+      _seed: seed = null,
+      _locale: locale = 'id_ID',
+      _type: type = null,
+    } = request.query;
 
-    // Validate quantity
-    if (quantity < 1 || quantity > 100) {
-      throw errorResponder(
-        errorTypes.VALIDATION_ERROR,
-        'Quantity must be between 1 and 100'
-      );
-    }
+    const credits = await creditCardService.generateCreditCards(
+      parseInt(quantity, 10),
+      seed,
+      locale,
+      type
+    );
 
-    const data = await creditCardService.generateCreditCards(quantity);
-
-    return response.status(200).json({
+    const responsePayload = {
       status: 'OK',
       code: 200,
-      locale: 'en_US',
-      seed: null,
-      total: quantity,
-      data,
-    });
-  } catch (error) {
-    return next(error);
-  }
-}
+      locale,
+      seed,
+      total: credits.length,
+      data: credits,
+    };
 
-async function deleteCreditCard(request, response, next) {
-  try {
-    const { id } = request.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw errorResponder(
-        errorTypes.VALIDATION_ERROR,
-        'Invalid credit card ID'
-      );
-    }
-
-    await creditCardService.removeCreditCard(id);
-
-    return response.status(200).json({
-      status: 'OK',
-      code: 200,
-      message: 'Credit card deleted successfully',
-    });
-  } catch (error) {
-    return next(error);
-  }
-}
-
-async function resetCreditCards(request, response, next) {
-  try {
-    await creditCardService.clearAllCreditCards();
-    await creditCardService.seedCreditCards();
-
-    return response.status(200).json({
-      status: 'OK',
-      message: 'Credit cards database reset successfully',
-    });
+    return response.status(200).json(responsePayload);
   } catch (error) {
     return next(error);
   }
@@ -69,6 +33,4 @@ async function resetCreditCards(request, response, next) {
 
 module.exports = {
   getCreditCards,
-  resetCreditCards,
-  deleteCreditCard,
 };
