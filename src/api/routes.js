@@ -9,6 +9,11 @@ const funfact = require('./components/funfact/funfact-route');
 const images = require('./components/images/images-route');
 const auth = require('./components/auth/auth-route');
 
+// NEW endpoints
+const products = require('./components/products/product-route');
+const places = require('./components/places/place-route');
+const texts = require('./components/texts/text-route');
+
 module.exports = () => {
   const app = express.Router();
 
@@ -20,6 +25,9 @@ module.exports = () => {
   funfact(app);
   images(app);
   auth(app);
+  products(app); // ← new
+  places(app); // ← new
+  texts(app); // ← new
 
   return app;
 };
