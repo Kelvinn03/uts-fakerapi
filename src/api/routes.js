@@ -1,6 +1,7 @@
 const express = require('express');
 
 const books = require('./components/books/books-route');
+const address = require('./components/address/address-route');
 const users = require('./components/users/users-route');
 const address = require('./components/address/address-route');
 const creditcards = require('./components/creditCards/creditcards-route');
@@ -18,6 +19,7 @@ module.exports = () => {
   const app = express.Router();
 
   books(app);
+  address(app);
   users(app);
   address(app);
   creditcards(app);

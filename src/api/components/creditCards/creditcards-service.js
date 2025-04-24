@@ -1,23 +1,14 @@
 const creditCardRepository = require('./creditcards-repository');
+const getRandomIds = require('../../../utils/randomizer');
 
-async function generateCreditCards(quantity) {
-  return creditCardRepository.getCreditCards(quantity);
-}
+async function getCreditCards(quantity, seed, locale, type) {
+  const creditCards = await creditCardRepository.getCreditCards(locale, type);
+  const ids = creditCards.map((_, index) => index);
+  const randomIds = getRandomIds(seed, ids);
 
-async function removeCreditCard(id) {
-  return creditCardRepository.deleteCreditCard(id);
-}
-
-async function clearAllCreditCards() {
-  return creditCardRepository.clearAllCreditCards();
-}
-async function seedCreditCards() {
-  return creditCardRepository.seedCreditCards();
+  return randomIds.slice(0, quantity).map((id) => creditCards[id]);
 }
 
 module.exports = {
-  generateCreditCards,
-  removeCreditCard,
-  clearAllCreditCards,
-  seedCreditCards,
+  getCreditCards,
 };
