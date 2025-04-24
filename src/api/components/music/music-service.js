@@ -1,14 +1,14 @@
-const peopleRepository = require('./people-repository');
+const musicRepository = require('./music-repository');
 const getRandomIds = require('../../../utils/randomizer');
 
-async function getPeople(quantity, seed, locale) {
-  const peoples = await peopleRepository.getPeople(locale);
-  const ids = peoples.map((_, index) => index);
+async function getMusic(quantity, seed, locale) {
+  const musics = await musicRepository.getMusic(locale);
+  const ids = musics.map((_, index) => index);
   const randomIds = getRandomIds(seed, ids);
 
-  return randomIds.slice(0, quantity).map((id) => peoples[id]);
+  return randomIds.slice(0, quantity).map((id) => musics[id]);
 }
 
 module.exports = {
-  getPeople,
+  getMusic,
 };
