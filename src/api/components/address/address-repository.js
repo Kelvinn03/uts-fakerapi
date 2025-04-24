@@ -1,4 +1,4 @@
-import { Addresss } from '../../../models';
+const { Addresss } = require('../../../models');
 
 async function getAddresses(locale, countryCode) {
   const query = { _locale: locale };
@@ -11,6 +11,6 @@ async function getAddresses(locale, countryCode) {
   );
 }
 
-export default {
+module.exports = {
   getAddresses,
 };

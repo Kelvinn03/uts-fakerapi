@@ -1,29 +1,14 @@
 const asciiArtRepository = require('./ascii-repository');
+const getRandomIds = require('../../../utils/randomizer');
 
-async function generateAscii(quantity) {
-  return asciiArtRepository.getRandomArt(quantity);
-}
+async function getAsciiArts(quantity, seed, locale, category) {
+  const asciiArts = await asciiArtRepository.getAddresses(locale, category);
+  const ids = asciiArts.map((_, index) => index);
+  const randomIds = getRandomIds(seed, ids);
 
-async function removeAsciiArt(id) {
-  try {
-    return await asciiArtRepository.deleteAsciiArt(id);
-  } catch (error) {
-    console.error('Error in removeAsciiArt:', error);
-    throw error;
-  }
-}
-
-async function clearAllAsciiArt() {
-  return asciiArtRepository.clearAllAsciiArt();
-}
-
-async function seedInitialData() {
-  return asciiArtRepository.seedInitialData();
+  return randomIds.slice(0, quantity).map((id) => asciiArts[id]);
 }
 
 module.exports = {
-  generateAscii,
-  removeAsciiArt,
-  clearAllAsciiArt,
-  seedInitialData,
+  getAsciiArts,
 };
