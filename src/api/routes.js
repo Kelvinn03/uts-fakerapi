@@ -13,6 +13,7 @@ const images = require('./components/images/images-route');
 const products = require('./components/products/product-route');
 const places = require('./components/places/place-route');
 const texts = require('./components/texts/text-route');
+const people = require('./components/people/people-route');
 
 module.exports = () => {
   const app = express.Router();
@@ -28,6 +29,7 @@ module.exports = () => {
   products(app);
   places(app);
   texts(app);
+  people(app);
 
   return app;
 };
