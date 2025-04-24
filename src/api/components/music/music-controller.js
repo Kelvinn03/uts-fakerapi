@@ -1,6 +1,6 @@
-const peopleService = require('./people-service');
+const musicService = require('./music-service');
 
-async function getPeople(request, response, next) {
+async function getMusic(request, response, next) {
   try {
     const {
       _quantity: quantity = 1,
@@ -8,7 +8,7 @@ async function getPeople(request, response, next) {
       _locale: locale = 'id_ID',
     } = request.query;
 
-    const peoples = await peopleService.getPeople(
+    const musics = await musicService.getMusic(
       parseInt(quantity, 10),
       seed,
       locale
@@ -19,8 +19,8 @@ async function getPeople(request, response, next) {
       code: 200,
       locale,
       seed,
-      total: peoples.length,
-      data: peoples,
+      total: musics.length,
+      data: musics,
     };
 
     return response.status(200).json(responsePayload);
@@ -30,5 +30,5 @@ async function getPeople(request, response, next) {
 }
 
 module.exports = {
-  getPeople,
+  getMusic,
 };

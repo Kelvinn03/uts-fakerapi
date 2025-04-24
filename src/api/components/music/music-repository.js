@@ -1,4 +1,4 @@
-import { Music } from '../../../models';
+const { Music } = require('../../../models');
 
 async function getMusic(locale) {
   const query = { _locale: locale };
@@ -6,6 +6,6 @@ async function getMusic(locale) {
   return Music.find(query).select('album artist genre index song_name');
 }
 
-export default {
+module.exports = {
   getMusic,
 };

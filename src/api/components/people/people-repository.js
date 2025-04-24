@@ -1,4 +1,4 @@
-import { People } from '../../../models';
+const { People } = require('../../../models');
 
 async function getPeople(locale) {
   const query = { _locale: locale };
@@ -8,6 +8,6 @@ async function getPeople(locale) {
   );
 }
 
-export default {
+module.exports = {
   getPeople,
 };
