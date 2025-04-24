@@ -1,7 +1,12 @@
 const { Texts } = require('../../../models');
 
-async function getTexts(locale) {
-  return Texts.find({ _locale: locale }).select(
+async function getTexts(locale, characters) {
+  const query = { _locale: locale };
+  if (characters) {
+    query.characters = characters;
+  }
+
+  return Texts.find(query).select(
     'title author genre content'
   );
 }

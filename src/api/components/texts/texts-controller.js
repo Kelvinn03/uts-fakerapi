@@ -6,12 +6,14 @@ async function getTexts(request, response, next) {
       _quantity: quantity = 1,
       _seed: seed = null,
       _locale: locale = 'id_ID',
+      _characters: characters = 200,
     } = request.query;
 
     const texts = await textsService.getTexts(
       parseInt(quantity, 10),
       seed,
       locale,
+      characters
     );
 
     const responsePayload = {
