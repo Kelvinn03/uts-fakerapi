@@ -5,7 +5,7 @@ async function getCreditCards(request, response, next) {
     const {
       _quantity: quantity = 1,
       _seed: seed = null,
-      _locale: locale = 'id_ID',
+      _locale: locale = null,
       _type: type = null,
     } = request.query;
 
@@ -31,6 +31,23 @@ async function getCreditCards(request, response, next) {
   }
 }
 
+async function seedCreditCards(request, response, next) {
+  try {
+    await creditCardService.seedCreditCards();
+
+    const responsePayload = {
+      status: 'OK',
+      code: 200,
+      message: 'Credit cards seeded successfully',
+    };
+
+    return response.status(200).json(responsePayload);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getCreditCards,
+  seedCreditCards,
 };

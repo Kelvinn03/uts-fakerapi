@@ -14,6 +14,7 @@ async function seedInitialData() {
       number: faker.finance.creditCardNumber(),
       expiration: faker.date.future().toISOString().split('T')[0],
       owner: faker.person.fullName(),
+      _locale: 'en_US',
     };
     creditCards.push(cards);
   }
@@ -23,7 +24,8 @@ async function seedInitialData() {
 
 async function isDataSeeded() {
   const count = await CreditCard.countDocuments();
-  if (count === 0) {
+  if (count >= 0) {
+    CreditCard.deleteMany({});
     await seedInitialData();
   }
 }

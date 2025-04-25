@@ -1,4 +1,5 @@
 const creditCardRepository = require('./creditcard-repository');
+const creditCardSeeder = require('./creditcard-seeder');
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getCreditCards(quantity, seed, locale, type) {
@@ -9,6 +10,11 @@ async function getCreditCards(quantity, seed, locale, type) {
   return randomIds.slice(0, quantity).map((id) => creditCards[id]);
 }
 
+async function seedCreditCards() {
+  await creditCardSeeder.isDataSeeded();
+}
+
 module.exports = {
   getCreditCards,
+  seedCreditCards,
 };
