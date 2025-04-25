@@ -13,7 +13,7 @@ async function seedInitialData() {
       ]),
       number: faker.finance.creditCardNumber(),
       expiration: faker.date.future().toISOString().split('T')[0],
-      owner: faker.person.findName(),
+      owner: faker.person.fullName(),
     };
     creditCards.push(cards);
   }

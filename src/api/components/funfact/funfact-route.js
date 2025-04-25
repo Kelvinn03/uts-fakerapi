@@ -6,4 +6,5 @@ const route = express.Router();
 module.exports = (app) => {
   app.use('/funFacts', route);
   route.get('/', funfactController.getFunFacts);
+  route.post('/seed', funfactController.seedFunFacts);
 };

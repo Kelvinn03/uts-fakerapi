@@ -6,5 +6,6 @@ module.exports = (db) =>
       year_found: Number,
       source: String,
       category: String,
+      _locale: String,
     })
   );
