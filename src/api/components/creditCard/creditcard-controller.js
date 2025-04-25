@@ -9,7 +9,7 @@ async function getCreditCards(request, response, next) {
       _type: type = null,
     } = request.query;
 
-    const credits = await creditCardService.generateCreditCards(
+    const credits = await creditCardService.getCreditCards(
       parseInt(quantity, 10),
       seed,
       locale,

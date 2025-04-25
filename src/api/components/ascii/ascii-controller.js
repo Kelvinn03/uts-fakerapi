@@ -1,6 +1,6 @@
 const AsciiArtService = require('./ascii-service');
 
-async function getAsciiArt(request, response, next) {
+async function getAsciiArts(request, response, next) {
   try {
     const {
       _quantity: quantity = 1,
@@ -9,7 +9,7 @@ async function getAsciiArt(request, response, next) {
       _type: type = null,
     } = request.query;
 
-    const asciiArts = await AsciiArtService.getAsciiArt(
+    const asciiArts = await AsciiArtService.getAsciiArts(
       parseInt(quantity, 10),
       seed,
       locale,
@@ -32,5 +32,5 @@ async function getAsciiArt(request, response, next) {
 }
 
 module.exports = {
-  getAsciiArt,
+  getAsciiArts,
 };
