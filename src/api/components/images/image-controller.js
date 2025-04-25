@@ -1,4 +1,4 @@
-const imageService = require('./images-service');
+const imageService = require('./image-service');
 
 async function getImages(request, response, next) {
   try {

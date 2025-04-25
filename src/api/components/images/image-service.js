@@ -1,8 +1,8 @@
-const imagesRepository = require('./images-repository');
+const imageRepository = require('./image-repository');
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getImages(quantity, seed, locale) {
-  const images = await imagesRepository.getImages(locale);
+  const images = await imageRepository.getImages(locale);
   const ids = images.map((_, index) => index);
   const randomIds = getRandomIds(seed, ids);
 
