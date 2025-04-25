@@ -6,13 +6,14 @@ const users = require('./components/users/users-route');
 const creditcards = require('./components/creditCard/creditcard-route');
 const asciiArt = require('./components/ascii/ascii-route');
 const funfact = require('./components/funfact/funfact-route');
+const quotes = require('./components/quotes/quotes-route');
 const images = require('./components/images/image-route');
 // const auth = require('./components/auth/auth-route');
 
 // NEW endpoints
 const products = require('./components/products/product-route');
 const places = require('./components/places/place-route');
-const texts = require('./components/texts/text-route');
+const texts = require('./components/texts/texts-route');
 const people = require('./components/people/people-route');
 const music = require('./components/music/music-route');
 
@@ -26,6 +27,7 @@ module.exports = () => {
   asciiArt(app);
   funfact(app);
   images(app);
+  quotes(app);
   // auth(app);
   products(app);
   places(app);
