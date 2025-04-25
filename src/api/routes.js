@@ -1,12 +1,12 @@
 const express = require('express');
 
 const books = require('./components/books/books-route');
-const users = require('./components/users/users-route');
 const address = require('./components/address/address-route');
-const creditcards = require('./components/creditCards/creditcards-route');
+const users = require('./components/users/users-route');
+const creditcards = require('./components/creditCard/creditcard-route');
 const asciiArt = require('./components/ascii/ascii-route');
 const funfact = require('./components/funfact/funfact-route');
-const images = require('./components/images/images-route');
+const images = require('./components/images/image-route');
 // const auth = require('./components/auth/auth-route');
 
 // NEW endpoints
@@ -20,8 +20,8 @@ module.exports = () => {
   const app = express.Router();
 
   books(app);
-  users(app);
   address(app);
+  users(app);
   creditcards(app);
   asciiArt(app);
   funfact(app);

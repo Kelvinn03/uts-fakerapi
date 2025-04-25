@@ -1,5 +1,3 @@
-const { generateAscii } = require('../api/components/ascii/ascii-service');
-
 module.exports = (db) =>
   db.model(
     'Music',

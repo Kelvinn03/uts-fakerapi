@@ -1,9 +1,9 @@
 const express = require('express');
-const imagesController = require('./images-controller');
+const imageController = require('./image-controller');
 
 const route = express.Router();
 
 module.exports = (app) => {
   app.use('/images', route);
-  route.get('/', imagesController.getImages);
+  route.get('/', imageController.getImages);
 };

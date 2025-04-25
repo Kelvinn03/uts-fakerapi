@@ -1,6 +1,6 @@
 module.exports = (db) =>
   db.model(
-    'Images',
+    'Image',
     db.Schema({
       title: String,
       description: String,
