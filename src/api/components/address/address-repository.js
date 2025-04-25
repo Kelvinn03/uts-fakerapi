@@ -1,4 +1,4 @@
-const { Addresss } = require('../../../models');
+const { Address } = require('../../../models');
 
 async function getAddresses(locale, countryCode) {
   const query = { _locale: locale };
@@ -6,7 +6,7 @@ async function getAddresses(locale, countryCode) {
     query.countryCode = countryCode;
   }
 
-  return Addresss.find(query).select(
+  return Address.find(query).select(
     'streetAddress streetName buildingName city postCode country countryCode latitude longitude'
   );
 }

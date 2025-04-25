@@ -1,6 +1,7 @@
 # UTS Backend Programming (2025)
 
 ## Kelompok 1
+
 - Shinichi Wijaya (535240025)
 - Faiz Abdurrahman (535240041)
 - Eric Cantona (535240162)
@@ -8,6 +9,7 @@
 - Kelvin (535249102)
 
 ## Topik
+
 [Faker API](https://fakerapi.it/)
 
 ## Backend Programming Template (2025)
