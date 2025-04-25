@@ -5,7 +5,5 @@ const route = express.Router();
 
 module.exports = (app) => {
   app.use('/funFacts', route);
-  route.get('/', funfactController.getFunFact);
-  route.delete('/:id', funfactController.deleteFunfact);
-  route.post('/reset', funfactController.resetFunfacts);
+  route.get('/', funfactController.getFunFacts);
 };

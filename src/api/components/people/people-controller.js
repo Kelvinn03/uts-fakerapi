@@ -1,19 +1,17 @@
-const AsciiArtService = require('./ascii-service');
+const peopleService = require('./people-service');
 
-async function getAsciiArts(request, response, next) {
+async function getPeople(request, response, next) {
   try {
     const {
       _quantity: quantity = 1,
       _seed: seed = null,
       _locale: locale = 'id_ID',
-      _type: type = null,
     } = request.query;
 
-    const asciiArts = await AsciiArtService.getAsciiArts(
+    const peoples = await peopleService.getPeople(
       parseInt(quantity, 10),
       seed,
-      locale,
-      type
+      locale
     );
 
     const responsePayload = {
@@ -21,8 +19,8 @@ async function getAsciiArts(request, response, next) {
       code: 200,
       locale,
       seed,
-      total: asciiArts.length,
-      data: asciiArts,
+      total: peoples.length,
+      data: peoples,
     };
 
     return response.status(200).json(responsePayload);
@@ -32,5 +30,5 @@ async function getAsciiArts(request, response, next) {
 }
 
 module.exports = {
-  getAsciiArts,
+  getPeople,
 };

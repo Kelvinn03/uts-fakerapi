@@ -1,6 +1,6 @@
-const AsciiArtService = require('./ascii-service');
+const creditCardService = require('./creditcards-service');
 
-async function getAsciiArts(request, response, next) {
+async function getCreditCards(request, response, next) {
   try {
     const {
       _quantity: quantity = 1,
@@ -9,7 +9,7 @@ async function getAsciiArts(request, response, next) {
       _type: type = null,
     } = request.query;
 
-    const asciiArts = await AsciiArtService.getAsciiArts(
+    const credits = await creditCardService.getCreditCards(
       parseInt(quantity, 10),
       seed,
       locale,
@@ -21,8 +21,8 @@ async function getAsciiArts(request, response, next) {
       code: 200,
       locale,
       seed,
-      total: asciiArts.length,
-      data: asciiArts,
+      total: credits.length,
+      data: credits,
     };
 
     return response.status(200).json(responsePayload);
@@ -32,5 +32,5 @@ async function getAsciiArts(request, response, next) {
 }
 
 module.exports = {
-  getAsciiArts,
+  getCreditCards,
 };

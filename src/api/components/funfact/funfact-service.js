@@ -1,29 +1,14 @@
 const funfactRepository = require('./funfact-repository');
+const getRandomIds = require('../../../utils/randomizer');
 
-async function generateFunfact(quantity) {
-  return funfactRepository.getRandomFact(quantity);
-}
+async function getFunFacts(quantity, seed, locale, category) {
+  const funFacts = await funfactRepository.getFunFacts(locale, category);
+  const ids = funFacts.map((_, index) => index);
+  const randomIds = getRandomIds(seed, ids);
 
-async function removeFunfact(id) {
-  try {
-    return await funfactRepository.deleteFunfact(id);
-  } catch (error) {
-    console.error('Error in removeFunfact:', error);
-    throw error;
-  }
-}
-
-async function clearAllFunfacts() {
-  return funfactRepository.clearAllFunfacts();
-}
-
-async function seedInitialData() {
-  return funfactRepository.seedInitialData();
+  return randomIds.slice(0, quantity).map((id) => funFacts[id]);
 }
 
 module.exports = {
-  generateFunfact,
-  removeFunfact,
-  clearAllFunfacts,
-  seedInitialData
+  getFunFacts,
 };

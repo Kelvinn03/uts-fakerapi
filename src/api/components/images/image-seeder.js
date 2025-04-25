@@ -1,7 +1,7 @@
-const { Images } = require('../../../models');
+const { Image } = require('../../../models');
 
 async function seedInitialData() {
-  const imagesList = [
+  const images = [
     {
       title: 'Aut itaque consequuntur eos.',
       description:
@@ -64,56 +64,17 @@ async function seedInitialData() {
     },
   ];
 
-  await Images.insertMany(imagesList);
+  await Image.insertMany(images);
 }
 
-async function getRandomImage(quantity = 1) {
-  try {
-    // First check if collection is empty
-    const count = await Images.countDocuments();
-
-    if (count === 0) {
-      await seedInitialData();
-    }
-
-    // Validate quantity
-    const validatedQuantity = Math.min(Math.max(parseInt(quantity), 1), 10);
-
-    // Get random documents
-    return await Images.aggregate([{ $sample: { size: validatedQuantity } }]);
-  } catch (error) {
-    console.error('Error in getRandomImage:', error);
-    throw error;
-  }
-}
-
-async function deleteImage(id) {
-  try {
-    const result = await Images.deleteOne({ _id: id });
-    if (result.deletedCount === 0) {
-      throw new Error('Image not found');
-    }
-    return { success: true };
-  } catch (error) {
-    console.error('Error deleting image:', error);
-    throw error;
-  }
-}
-
-async function clearAllImages() {
-  try {
-    const result = await Images.deleteMany({});
-    console.log(`Cleared ${result.deletedCount} images`);
-    return result;
-  } catch (error) {
-    console.error('Error clearing images:', error);
-    throw error;
+async function isDataSeeded() {
+  const count = await Image.countDocuments();
+  if (count === 0) {
+    await seedInitialData();
   }
 }
 
 module.exports = {
-  getRandomImage,
   seedInitialData,
-  deleteImage,
-  clearAllImages,
+  isDataSeeded,
 };
