@@ -8,4 +8,6 @@ module.exports = (app) => {
   app.use('/texts', route);
 
   route.get('/', textsController.getTexts);
+
+  route.post('/seed', textsController.seedTexts);
 };

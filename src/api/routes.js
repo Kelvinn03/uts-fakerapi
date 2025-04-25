@@ -13,7 +13,7 @@ const images = require('./components/images/image-route');
 // NEW endpoints
 const products = require('./components/products/product-route');
 const places = require('./components/places/place-route');
-const texts = require('./components/texts/text-route');
+const texts = require('./components/texts/texts-route');
 const people = require('./components/people/people-route');
 const music = require('./components/music/music-route');
 
