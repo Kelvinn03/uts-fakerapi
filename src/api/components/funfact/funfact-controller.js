@@ -9,7 +9,7 @@ async function getFunFacts(request, response, next) {
       _type: type = null,
     } = request.query;
 
-    const funFacts = await funfactService.getFunFact(
+    const funFacts = await funfactService.getFunFacts(
       parseInt(quantity, 10),
       seed,
       locale,

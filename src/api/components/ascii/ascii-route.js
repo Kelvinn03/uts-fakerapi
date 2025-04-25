@@ -5,5 +5,5 @@ const route = express.Router();
 
 module.exports = (app) => {
   app.use('/asciiArts', route);
-  route.get('/', asciiArtController.getAsciiArt);
+  route.get('/', asciiArtController.getAsciiArts);
 };
