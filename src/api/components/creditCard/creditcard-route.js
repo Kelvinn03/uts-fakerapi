@@ -1,5 +1,5 @@
 const express = require('express');
-const creditCardController = require('./creditcards-controller');
+const creditCardController = require('./creditcard-controller');
 
 const route = express.Router();
 

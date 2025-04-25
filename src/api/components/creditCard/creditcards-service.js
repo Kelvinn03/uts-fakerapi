@@ -1,4 +1,4 @@
-const creditCardRepository = require('./creditcards-repository');
+const creditCardRepository = require('./creditcard-repository');
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getCreditCards(quantity, seed, locale, type) {
