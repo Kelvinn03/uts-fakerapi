@@ -9,7 +9,7 @@ async function getImages(request, response, next) {
       _type: type = null,
     } = request.query;
 
-    const images = await imageService.getFunFact(
+    const images = await imageService.getImages(
       parseInt(quantity, 10),
       seed,
       locale,
