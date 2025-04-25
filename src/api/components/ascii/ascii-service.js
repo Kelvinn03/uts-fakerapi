@@ -1,4 +1,5 @@
 const asciiArtRepository = require('./ascii-repository');
+const asciiArtSeeder = require('./ascii-seeder');
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getAsciiArts(quantity, seed, locale, category) {
@@ -9,6 +10,11 @@ async function getAsciiArts(quantity, seed, locale, category) {
   return randomIds.slice(0, quantity).map((id) => asciiArts[id]);
 }
 
+async function asciiSeeder() {
+  await asciiArtSeeder.isDataSeeded();
+}
+
 module.exports = {
   getAsciiArts,
+  asciiSeeder,
 };

@@ -5,7 +5,7 @@ async function getImages(request, response, next) {
     const {
       _quantity: quantity = 1,
       _seed: seed = null,
-      _locale: locale = 'id_ID',
+      _locale: locale = 'en',
       _type: type = null,
     } = request.query;
 
@@ -31,6 +31,23 @@ async function getImages(request, response, next) {
   }
 }
 
+async function seedImages(request, response, next) {
+  try {
+    await imageService.seedImages();
+
+    const responsePayload = {
+      status: 'OK',
+      code: 200,
+      message: 'Image data seeded successfully',
+    };
+
+    return response.status(200).json(responsePayload);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getImages,
+  seedImages,
 };

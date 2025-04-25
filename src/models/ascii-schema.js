@@ -5,5 +5,6 @@ module.exports = (db) =>
       title: String,
       art: String,
       category: String,
+      _locale: String,
     })
   );

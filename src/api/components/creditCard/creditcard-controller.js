@@ -5,13 +5,13 @@ async function getCreditCards(request, response, next) {
     const {
       _quantity: quantity = 1,
       _seed: seed = null,
-      _locale: locale = 'id_ID',
+      _locale: locale = 'en',
     } = request.query;
 
     const credits = await creditCardService.getCreditCards(
       parseInt(quantity, 10),
       seed,
-      locale,
+      locale
     );
 
     const responsePayload = {

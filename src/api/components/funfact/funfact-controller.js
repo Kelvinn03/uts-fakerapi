@@ -5,7 +5,7 @@ async function getFunFacts(request, response, next) {
     const {
       _quantity: quantity = 1,
       _seed: seed = null,
-      _locale: locale = 'id_ID',
+      _locale: locale = 'en',
     } = request.query;
 
     const funFacts = await funfactService.getFunFacts(
