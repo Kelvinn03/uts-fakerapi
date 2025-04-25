@@ -1,4 +1,6 @@
 const imageRepository = require('./image-repository');
+const imageSeeder = require('./image-seeder');
+
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getImages(quantity, seed, locale) {
@@ -9,6 +11,11 @@ async function getImages(quantity, seed, locale) {
   return randomIds.slice(0, quantity).map((id) => images[id]);
 }
 
+async function seedImages() {
+  await imageSeeder.isDataSeeded();
+}
+
 module.exports = {
   getImages,
+  seedImages,
 };

@@ -6,4 +6,5 @@ const route = express.Router();
 module.exports = (app) => {
   app.use('/asciiArts', route);
   route.get('/', asciiArtController.getAsciiArts);
+  route.post('/seed', asciiArtController.asciiSeeder);
 };

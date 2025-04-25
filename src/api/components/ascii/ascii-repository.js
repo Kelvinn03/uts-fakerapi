@@ -1,10 +1,7 @@
 const { AsciiArt } = require('../../../models');
 
-async function getAsciiArts(locale, category) {
+async function getAsciiArts(locale) {
   const query = { _locale: locale };
-  if (category) {
-    query.category = category;
-  }
 
   return AsciiArt.find(query).select('title art category');
 }

@@ -6,4 +6,5 @@ const route = express.Router();
 module.exports = (app) => {
   app.use('/creditCards', route);
   route.get('/', creditCardController.getCreditCards);
+  route.post('/seed', creditCardController.seedCreditCards);
 };
