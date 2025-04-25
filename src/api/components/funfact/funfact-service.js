@@ -2,7 +2,7 @@ const funfactRepository = require('./funfact-repository');
 const getRandomIds = require('../../../utils/randomizer');
 
 async function getFunFacts(quantity, seed, locale, category) {
-  const funFacts = await funfactRepository.getFunFact(locale, category);
+  const funFacts = await funfactRepository.getFunFacts(locale, category);
   const ids = funFacts.map((_, index) => index);
   const randomIds = getRandomIds(seed, ids);
 
