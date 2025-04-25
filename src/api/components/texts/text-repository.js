@@ -1,7 +1,9 @@
+// Filters by locale if provided; otherwise returns every doc.
 const { Texts } = require('../../../models');
 
 async function getTexts(locale) {
-  return Texts.find({ _locale: locale }).select('title author content');
+  const query = locale ? { _locale: locale } : {};
+  return Texts.find(query).select('title author content _locale');
 }
 
 module.exports = { getTexts };
