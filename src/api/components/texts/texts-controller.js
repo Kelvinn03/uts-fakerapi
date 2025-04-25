@@ -6,7 +6,7 @@ async function getTexts(request, response, next) {
       _quantity: quantity = 10,
       _seed: seed = null,
       _locale: locale = 'en',
-      _characters: characters = null,
+      _characters: characters = 200,
     } = request.query;
 
     const texts = await textsService.getTexts(

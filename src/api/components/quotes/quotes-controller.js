@@ -6,7 +6,7 @@ async function getQuotes(request, response, next) {
     const {
       _quantity: quantity = 10,
       _seed: seed = null,
-      _locale: locale = 'id_ID',
+      _locale: locale = 'en',
     } = request.query;
 
     const quotes = await quotesService.getQuotes(
@@ -45,6 +45,21 @@ async function createQuote(request, response, next) {
     const quote = await quotesService.create(content, author, category);
 
     return response.status(200).json(quote);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function seedQuotes(request, response, next) {
+  try {
+    await quotesService.seedQuotes();
+    const responsePayload = {
+      status: 'OK',
+      code: 200,
+      message: 'Quotes Seeded successfully',
+    };
+
+    return response.status(200).json(responsePayload);
   } catch (error) {
     return next(error);
   }

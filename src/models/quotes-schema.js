@@ -5,6 +5,6 @@ module.exports = (db) =>
       content: String,
       author: String,
       category: String,
-      locale: String,
+      _locale: String,
     })
   );
