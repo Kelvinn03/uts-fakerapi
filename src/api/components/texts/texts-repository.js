@@ -6,9 +6,7 @@ async function getTexts(locale, characters) {
     query.characters = characters;
   }
 
-  return Texts.find(query).select(
-    'title author genre content'
-  );
+  return Texts.find(query).select('title author genre content');
 }
 
 module.exports = {

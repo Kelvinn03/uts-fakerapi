@@ -3,7 +3,7 @@ const textsService = require('./texts-service');
 async function getTexts(request, response, next) {
   try {
     const {
-      _quantity: quantity = 1,
+      _quantity: quantity = 10,
       _seed: seed = null,
       _locale: locale = 'id_ID',
       _characters: characters = 200,
