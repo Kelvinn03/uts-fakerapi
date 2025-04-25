@@ -1,28 +1,20 @@
-const faker = require('faker');
-const { Address }= require('../../../models');
+const { Address } = require('../../../models');
+const { seedData } = require('../../../utils/seeder');
 
-async function seedInitialData () {
-    const addresses = [];
+async function seedInitialData() {
+  const addressesFields = [
+    'address',
+    'streetName',
+    'buildingName',
+    'city',
+    'zipcode',
+    'country',
+    'countryCode',
+    'latitude',
+    'longitude',
+  ];
 
-    for (let i = 0; i < 10; i++) {
-      addresses.push({
-        street: faker.address.streetAddress(),
-        city: faker.address.city(),
-        state: faker.address.state(),
-        zipCode: faker.address.zipCode(),
-        country: faker.address.country(),
-      });
-    }
-
-    console.log('Seeded Addresses:', addresses);
-    Address.insertMany(addresses, (err, docs) => {
-      if (err) {
-        console.error('Error seeding addresses:', err);
-      } else {
-        console.log('Addresses seeded successfully:', docs);
-      }
-    });
-  },
-};
+  seedData(Address, 50, addressesFields);
+}
 
 module.exports = seedInitialData;
