@@ -19,5 +19,6 @@ module.exports = (db) =>
         latitude: Number,
         longitude: Number,
       },
+      _locale: String,
     })
   );

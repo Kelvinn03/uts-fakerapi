@@ -9,5 +9,6 @@ module.exports = (db) =>
       genre: String,
       index: String,
       song_name: String,
+      _locale: String,
     })
   );
