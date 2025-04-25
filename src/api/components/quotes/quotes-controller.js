@@ -68,4 +68,5 @@ async function seedQuotes(request, response, next) {
 module.exports = {
   getQuotes,
   createQuote,
+  seedQuotes,
 };
