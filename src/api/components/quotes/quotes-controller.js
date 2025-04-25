@@ -3,25 +3,28 @@ const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getQuotes(request, response, next) {
   try {
-    const offset = parseInt(request.query.offset, 10) || 0;
-    const limit = parseInt(request.query.limit, 10) || 10;
+    const {
+      _quantity: quantity = 10,
+      _seed: seed = null,
+      _locale: locale = 'id_ID',
+    } = request.query;
 
-    if (offset < 0) {
-      throw errorResponder(
-        errorTypes.VALIDATION_ERROR,
-        'Offset must be a non-negative number'
-      );
-    }
+    const quotes = await quotesService.getQuotes(
+      parseInt(quantity, 10),
+      seed,
+      locale
+    );
 
-    if (limit < 1) {
-      throw errorResponder(
-        errorTypes.VALIDATION_ERROR,
-        'Limit must be a positive number'
-      );
-    }
+    const responsePayload = {
+      status: 'OK',
+      code: 200,
+      locale,
+      seed,
+      total: quotes.length,
+      data: quotes,
+    };
 
-    const result = await quotesService.getQuotes(offset, limit);
-    return response.status(200).json(result);
+    return response.status(200).json(responsePayload);
   } catch (error) {
     return next(error);
   }
